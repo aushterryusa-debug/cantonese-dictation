@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17655c"><meta name="description" content="用紙筆慢慢練習：小二粵語默書，認字拆解、逐題朗讀、分小節讀、田字格核對及紙上改正。">
+<title>粵語默書小幫手</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar"><a class="brand" href="#" aria-label="粵語默書小幫手首頁"><span class="brand-mark" aria-hidden="true">✎</span><span>默書小幫手<small>小二中文 · 單元二</small></span></a><span class="tag">粵語紙筆練習</span></header>
+<main>
+<section id="setup" aria-labelledby="welcome-title">
+<div class="intro"><p class="eyebrow">一張紙，一支筆，慢慢嚟。</p><h1 id="welcome-title">先認清字形，<br>再聽住慢慢寫。</h1><p class="lead">自己揀節奏，寫好先核對答案；<br>寫錯即場喺紙上改正 3 次，唔使打字、唔使影相。</p></div>
+<div class="setup-card">
+<h2>今日想練邊一部分？</h2>
+<div class="mode-list" role="group" aria-label="選擇默書內容">
+<button class="mode selected" data-mode="words" aria-pressed="true" type="button"><span class="mode-symbol">字</span><span><strong>詞語</strong><small>8 題 · 由短詞語開始</small></span><span class="mode-check" aria-hidden="true">✓</span></button>
+<button class="mode" data-mode="sentences" aria-pressed="false" type="button"><span class="mode-symbol">句</span><span><strong>段落逐句默</strong><small>3 題 ·《講故事》第三段（支援分小節讀＋讀標點）</small></span><span class="mode-check" aria-hidden="true">✓</span></button>
+<button class="mode" data-mode="all" aria-pressed="false" type="button"><span class="mode-symbol">全</span><span><strong>全部練習</strong><small>11 題 · 詞語 + 段落</small></span><span class="mode-check" aria-hidden="true">✓</span></button>
+</div>
+<div class="voice-box"><div class="voice-heading"><span class="status-dot" id="voice-dot"></span><strong id="voice-title">正在檢查粵語聲音…</strong></div><p id="voice-info" role="status">請稍等，聲音由你嘅裝置提供。</p><label class="voice-label" for="voice-select">粵語聲音</label><select id="voice-select" aria-label="選擇粵語聲音"><option>正在載入…</option></select><div class="voice-actions"><button id="test-voice" class="text-button" type="button" disabled>▶ 試聽聲音</button><button id="refresh-voices" class="text-button" type="button">重新檢查</button></div></div>
+<button id="start" class="primary full" type="button" disabled>開始默書 <span aria-hidden="true">→</span></button>
+<button id="manual-start" class="text-button full" type="button">由大人讀，照樣練習</button>
+<p class="hint">準備好紙同筆。先試聽，確認讀出嚟係粵語；亦可以先打開下面「默書前認字溫習卡」睇清難字。</p>
+</div>
+
+<details id="study-deck" class="study-deck">
+<summary>📖 默書前先溫習難字拆解（田字格 ＋ 易錯位貼士）</summary>
+<p class="study-intro">默書前用 1 分鐘望清部首同筆畫，特別留意易漏一點或易撈亂嘅部首；撳「🔊 聽讀音」可以邊聽邊記。</p>
+<div id="study-cards" class="study-cards"></div>
+</details>
+
+<details class="source-info"><summary>練習內容及使用提示</summary><p>內容按照小二單元二默書溫習紙：8 個詞語，以及《講故事》第三段，分成 3 句。</p><p>溫習紙嘅「詞語應用（填充題）」冇列出題目，所以呢度冇加入。加分站「寫出五個擬聲詞」亦唔納入讀默或提供標準答案。</p><p>裝置必須提供粵語（yue／zh-HK）聲音。呢個網頁唔會自動改用普通話。冇粵語聲音時，可以用「由大人讀」。</p><p>提示：保持頁面開住。如果冇聲，檢查媒體音量，再按「試聽聲音」。部分手機嘅暫停／繼續可能唔穩定，按「再讀一次」可由頭重播。</p></details>
+</section>
+
+<section id="practice" hidden aria-labelledby="practice-title">
+<div class="session-heading"><div><p class="eyebrow" id="session-label">詞語練習</p><h1 id="practice-title">慢慢寫，唔使急。</h1></div><button id="leave" class="text-button" type="button">重新選擇</button></div>
+<div class="progress-row"><span id="question-label">第 1 / 8 題</span><span id="session-kind">讀默詞語</span></div><div class="progress-track" role="progressbar" aria-label="默書進度" aria-valuemin="0" aria-valuemax="8" aria-valuenow="1"><div id="progress-fill"></div></div>
+<article class="practice-card">
+<div id="hidden-answer" class="listening-area">
+  <div class="sound-art" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <h2 id="question-instruction">聽一聽，喺紙上寫低。</h2>
+  <p id="question-hint">答案會收埋，寫好先開答案逐字核對。</p>
+  <button id="hint-btn" class="hint-pill" type="button">💡 唔記得點寫？睇少少部首提示（唔開答案）</button>
+  <p id="hint-box" class="hint-box" hidden></p>
+</div>
+<div id="answer-panel" class="answer-panel" hidden>
+  <div class="answer-panel-top">
+    <p class="eyebrow">逐字對一對答案（自我核對）</p>
+    <button id="rehide" class="mini-ghost" type="button">🙈 收埋答案再默一次</button>
+  </div>
+  <p id="answer-text" class="answer-text sr-only"></p>
+  <div id="char-grid" class="char-grid" aria-label="田字格逐字核對"></div>
+  <p class="tap-guide">👆 如果邊個字寫錯或漏咗標點，可以<strong>撳上面嗰一格</strong>記低，下面會教你點樣寫啱！</p>
+  <div id="writing-tip" class="writing-tip"></div>
+  <div id="correction-coach" class="correction-coach" hidden>
+    <p class="coach-title">✏️ 紙上改正小任務（寫啱先記得牢！）</p>
+    <p id="coach-body" class="coach-body"></p>
+    <button id="coach-done" class="coach-btn" type="button">✓ 我已經喺紙上認真改正 3 次</button>
+  </div>
+</div>
+<p id="speech-status" class="speech-status" role="status" aria-live="polite">準備好就按「讀呢題」。</p>
+<div class="play-controls"><button id="play" class="primary" type="button">▶ 讀呢題</button><button id="slow" class="secondary" type="button">🐢 慢讀</button><button id="pause" class="secondary" type="button" disabled>暫停</button></div>
+<div id="sentence-tools" class="sentence-tools" hidden>
+  <div class="punct-toggle-row">
+    <label class="punct-check"><input type="checkbox" id="speak-punct" checked> <span>讀埋標點符號（冒號、引號、逗號、句號）</span></label>
+  </div>
+  <div class="clause-row">
+    <span class="clause-label">長句分小節讀：</span>
+    <div id="clause-buttons" class="clause-buttons"></div>
+  </div>
+</div>
+<div class="answer-actions">
+  <button id="reveal" class="reveal-button" type="button">👀 寫好喇，睇答案核對</button>
+  <div id="mark-controls" hidden>
+    <p>自己對完答案（呢個係自評，唔係自動批改），揀一個：</p>
+    <div class="mark-buttons"><button id="mark-correct" class="secondary" type="button">✓ 我寫啱喇</button><button id="mark-retry" class="secondary" type="button">↻ 再練一次</button></div>
+  </div>
+</div>
+</article>
+<div class="nav-controls"><button id="previous" class="text-button" type="button">← 上一題</button><button id="next" class="secondary" type="button">跳過呢題 →</button></div><p class="hint center">唔會自動跳題。核對及改正好，你準備好先去下一題。</p>
+</section>
+
+<section id="summary" hidden aria-labelledby="summary-title">
+<div class="summary-hero"><div class="finish-star" aria-hidden="true">✦</div><p class="eyebrow">今次練習完成</p><h1 id="summary-title">做得好，休息一下！</h1><p id="summary-copy"></p></div>
+<div class="score-grid"><div><strong id="correct-count">0</strong><span>自己對啱</span></div><div><strong id="retry-count">0</strong><span>想再練</span></div><div><strong id="unmarked-count">0</strong><span>未對答案</span></div></div>
+<div id="missed-focus-box" class="missed-focus-box" hidden>
+  <h2>📌 今日要特別記住嘅字同標點</h2>
+  <ul id="missed-focus-list"></ul>
+</div>
+<div class="summary-actions"><button id="retry-missed" class="primary full" type="button">再練未熟嘅題目</button><button id="restart" class="secondary full" type="button">重新選擇練習</button></div>
+<details class="answer-review"><summary>查看答案及修改自評</summary><p class="hint">呢個係自己核對，唔係手寫識別或自動批改。</p><ol id="answer-list"></ol></details>
+</section>
+</main>
+<footer>用紙筆練習 · 網頁唔收集作答或儲存成績<details><summary>私隱及聲音說明</summary><p>冇登入、冇相機、冇咪高峰、冇姓名或學生成績上載功能。自評同改正紀錄只留喺今次頁面記憶體，重新整理就會清除。聲音由裝置／瀏覽器提供，部分語音服務可能需要網絡。網站寄存平台可能有一般服務紀錄。</p></details></footer>
+</div>
+<dialog id="exit-dialog" aria-labelledby="exit-title"><h2 id="exit-title">返回選擇練習？</h2><p>今次進度會清除。</p><div class="dialog-buttons"><button id="cancel-exit" class="secondary" type="button">繼續練習</button><button id="confirm-exit" class="primary" type="button">返回選擇</button></div></dialog>
+<script type="module" src="app.js"></script>
+</body></html>
